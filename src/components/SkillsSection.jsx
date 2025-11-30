@@ -4,34 +4,44 @@ import {cn} from "@/lib/utils";
 
 const skills = [
     //Frontend
-    {name: "HTML/CSS", level: 50, category: "frontend"},
-    {name: "JavaScript", level: 50, category: "frontend"},
-    {name: "React", level: 50, category: "frontend"},
-    {name: "Tailwind CSS", level: 50, category: "frontend"},
+    {name: "HTML/CSS", level: 90, category: "frontend"},
+    {name: "JavaScript", level: 75, category: "frontend"},
+    {name: "React", level: 70, category: "frontend"},
+    {name: "Tailwind CSS", level: 60, category: "frontend"},
     
     //Backend
-    {name: "Django", level: 50, category: "backend"},
-    {name: "MySQL", level: 50, category: "backend"},
+    {name: "Django", level: 65, category: "backend"},
+    {name: "MySQL", level: 70, category: "backend"},
     {name: "Insomnia", level: 50, category: "backend"},
 
     // Tools
-    {name: "Git/GitHub", level: 50, category: "tools"},
-    {name: "VS Code", level: 50, category: "tools"},
+    {name: "Git/GitHub", level: 90, category: "tools"},
+    {name: "VS Code", level: 95, category: "tools"},
     {name: "Arduino", level: 70, category: "tools"},
 
     //CAD
-    {name: "Inventor", level: 80, category: "CAD"},
-    {name: "AutoCAD", level: 70, category: "CAD"},
-    {name: "Fusion360", level: 60, category: "CAD"},
+    {name: "OnShape", level: 95, category: "CAD/CAM"},
+    {name: "Inventor", level: 85, category: "CAD/CAM"},
+    {name: "AutoCAD", level: 70, category: "CAD/CAM"},
+    {name: "Fusion360", level: 70, category: "CAD/CAM"},
+
+    //Machining
+    {name: "3D Printing", level: 90, category: "Machining"},
+    {name: "Laser Cutting", level: 90, category: "Machining"},
+    {name: "CNC Milling", level: 90, category: "Machining"},
+    {name: "Plasma Cutting", level: 90, category: "Machining"},
+    {name: "Soldering", level: 80, category: "Machining"},
+    {name: "GCode", level: 30, category: "Machining"},
 ];
 
-const categories = ["all", "frontend", "backend", "tools", "CAD"];
+const categories = ["all", "CAD/CAM", "frontend", "backend", "tools", "Machining"];
 
 export const SkillsSection = () => {
     const [activeCategory, setActiveCategory] = useState("all");
-    const filteredSkills = skills.filter(
-        (skill) => activeCategory === "all" || skill.category === activeCategory
-    );
+    const filteredSkills = skills
+        .filter((skill) => activeCategory === "all" || skill.category === activeCategory)
+        .slice() // optional: avoid mutating original array
+        .sort((a, b) => b.level - a.level); // sort highest -> lowest
 
     return( <section id="skills" 
     className="py-24 px-4 relative bg-secondary/30">
@@ -55,7 +65,7 @@ export const SkillsSection = () => {
                 ))}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {filteredSkills.map((skill, key) => (
                     <div key={key} className="bg-card p-6 rounded-lg shadow-xs card-hover">
                         <div className="text-left mb-4">
