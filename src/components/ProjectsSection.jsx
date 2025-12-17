@@ -13,7 +13,7 @@ const projects = [
     },
 
     {
-        id: 2,
+        id: 4,
         title: "First Front-end Website!",
         description: "Based off some tutorials and my own skill. Personalized it on the go!",
         image: "/projects/project2.png",
@@ -23,7 +23,7 @@ const projects = [
     },
 
     {
-        id: 3,
+        id: 5,
         title: "Backend Development",
         description: "Spent some free time learning about backend "+
         "development on Coursera, and earned a certificite in full-stack web development.",
@@ -35,7 +35,7 @@ const projects = [
 
     
     {
-        id: 4,
+        id: 2,
         title: "Drone Build",
         description: "Designed and built drone from scratch." +
         "Competed in the Technology Student Association State competition!",
@@ -45,7 +45,7 @@ const projects = [
     },
 
     {
-        id: 5,
+        id: 3,
         title: "Bioprinting Research Project",
         description: "Placed 4th at the Technology Student Association Biotechnology Design challenge! " +
         "My team investigated the processes of bioprinting, and got the chance to speak with Dr. Jihui Li " +
@@ -53,11 +53,23 @@ const projects = [
         image: "/projects/bioPrinting.jpg",
         tags: ["Research", "Bioengineering"],
         demoUrl: "#", //live version of project
+    },
+
+    {
+        id: 6,
+        title: "Science Olympiad Electric Vehicle",
+        description: "My 25-26' Science Olympiad team is building an electric vehicle!",
+        image: "/projects/ElectricVehicle26.png",
+        tags: ["Electrical", "Mechanical", "Design"],
+        demoUrl: "#", //live version of project
     }
 
 ]
 
 export const ProjectsSection = () => {
+
+    const sortedProjects = projects.slice().sort((a, b) => a.id - b.id);
+
     return <section id="projects" className="py-24 px-4 relative">
         <div className="container mx-auto max-w-5xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
@@ -71,7 +83,7 @@ export const ProjectsSection = () => {
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project, key) => (
+                    {sortedProjects.map((project, key) => (
                         <div key={key} className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover">
                             <div className="h-60 overflow-hidden">
                                 <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
@@ -80,11 +92,10 @@ export const ProjectsSection = () => {
                             <div className="p-6">
                                 <div className="flex flex-wrap gap-2 mb-4">
                                     {project.tags.map((tag) => (
-                                        <span className="px-2 py-1 text-xs font-medium rounded-full border bg-secondary text-secondary-foreground">
+                                        <span key={tag} className="px-2 py-1 text-xs font-medium rounded-full border bg-secondary text-secondary-foreground">
                                             {tag}
                                         </span>
-                                    )
-                                )}
+                                    ))}
                                 </div>
                                     <h3 className="text-xl font-semibold mb-6">{project.title}</h3>
                                     <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
